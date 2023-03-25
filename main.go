@@ -3,11 +3,17 @@ package main
 import (
 	"encoding/xml"
 	"fmt"
+	"log"
 	"net/http"
+	"os"
+	"strconv"
 	"time"
+
+	"github.com/joho/godotenv"
 )
 
-const (
+// global vars with default values
+var (
 	// website to stir (default: localhost:3000)
 	WEBSITE = "http://localhost:3000"
 	// path to sitemap (default: sitemap.xml)
@@ -22,6 +28,37 @@ const (
 
 type Sitemap struct {
 	Locations []string `xml:"url>loc"`
+}
+
+// try to get all the global vars from the environment / .env file
+// if they are not set, use the default values
+// >> this is run before the main function
+func init() {
+	// load .env file
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("Not loading .env file")
+	}
+	if website := os.Getenv("WEBSITE"); website != "" {
+		fmt.Println("WEBSITE =", website)
+		WEBSITE = website
+	}
+	if sitemap := os.Getenv("SITEMAP"); sitemap != "" {
+		fmt.Println("SITEMAP =", sitemap)
+		SITEMAP = sitemap
+	}
+	if interval := os.Getenv("INTERVAL"); interval != "" {
+		fmt.Println("INTERVAL =", interval)
+		INTERVAL, _ = time.ParseDuration(interval)
+	}
+	if consecutive := os.Getenv("CONSECUTIVE"); consecutive != "" {
+		fmt.Println("CONSECUTIVE =", consecutive)
+		CONSECUTIVE, _ = strconv.Atoi(consecutive)
+	}
+	if delay := os.Getenv("DELAY"); delay != "" {
+		fmt.Println("DELAY =", delay)
+		DELAY, _ = time.ParseDuration(delay)
+	}
 }
 
 // get all urls from sitemap
