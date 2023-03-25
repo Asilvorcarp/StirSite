@@ -93,7 +93,7 @@ func StirURL(url string) {
 	fmt.Println("- Stirred", url)
 }
 
-// sitr the website once
+// stir the website once
 func StirOnce() {
 	urls := getAllUrls()
 	for _, url := range urls {
