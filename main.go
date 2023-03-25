@@ -12,10 +12,12 @@ const (
 	WEBSITE = "http://localhost:3000"
 	// path to sitemap (default: sitemap.xml)
 	SITEMAP = "sitemap.xml"
-	// interval between each request (default: 1 hour)
+	// interval between each stir (default: 1 hour)
 	INTERVAL = time.Hour
 	// number of consecutive requests to make each time (default: 3)
 	CONSECUTIVE = 3
+	// number of seconds to wait before making a request (default: 1 second)
+	DELAY = time.Second
 )
 
 type Sitemap struct {
@@ -49,6 +51,7 @@ func StirURL(url string) {
 			fmt.Println(err)
 		}
 		resp.Body.Close()
+		time.Sleep(DELAY)
 	}
 	fmt.Println("- Stirred", url)
 }
@@ -59,6 +62,7 @@ func StirOnce() {
 	for _, url := range urls {
 		StirURL(url)
 	}
+	fmt.Println("- Stirred", len(urls), "urls")
 }
 
 func main() {
