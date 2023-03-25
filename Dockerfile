@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM golang:1.20-alpine AS build
+FROM golang:alpine AS build
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies

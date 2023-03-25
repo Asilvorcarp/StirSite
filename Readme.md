@@ -22,6 +22,6 @@ $ go run main.go
 ## Todo
 
 - [ ] github action version
-- [ ] docker version
 - [ ] list of sites to stir
+- [x] docker version
 - [x] read .env file
