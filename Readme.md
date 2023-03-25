@@ -1,6 +1,8 @@
 # Stir Site
 
-A script to make my website refresh itself by stirring it.
+A script to make my website up to date by stirring it.
+
+(like my blog with Notion as CMS)
 
 ## Todo
 
